@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { Product, Prisma } from '@prisma/client';
 import { parse, format } from 'date-fns';
 
 export interface FormattedProduct {
-  // Certifique-se de exportar a interface
   id: number;
   title: string;
   description: string;
@@ -46,6 +45,25 @@ export class ProductsService {
     };
   }
 
+  async createMany(
+    data: Prisma.ProductCreateInput[],
+  ): Promise<FormattedProduct[]> {
+    const createdProducts = [];
+    for (const productData of data) {
+      productData.releaseDate = parse(
+        productData.releaseDate as unknown as string,
+        'dd-MM-yyyy',
+        new Date(),
+      );
+      const product = await this.prisma.product.create({ data: productData });
+      createdProducts.push({
+        ...product,
+        releaseDate: format(product.releaseDate, 'dd-MM-yyyy'),
+      });
+    }
+    return createdProducts;
+  }
+
   async update(
     id: number,
     data: Prisma.ProductUpdateInput,
@@ -70,5 +88,9 @@ export class ProductsService {
       ...product,
       releaseDate: format(product.releaseDate, 'dd-MM-yyyy'),
     };
+  }
+
+  async removeAll(): Promise<void> {
+    await this.prisma.product.deleteMany({});
   }
 }

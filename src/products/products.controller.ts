@@ -33,9 +33,21 @@ export class ProductsController {
     return this.productsService.create(createProductDto);
   }
 
+  @Post('bulk')
+  createMany(
+    @Body() createProductDtos: CreateProductDto[],
+  ): Promise<FormattedProduct[]> {
+    return this.productsService.createMany(createProductDtos);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string): Promise<FormattedProduct> {
     return this.productsService.remove(Number(id));
+  }
+
+  @Delete()
+  removeAll(): Promise<void> {
+    return this.productsService.removeAll();
   }
 
   @Put(':id')
@@ -47,4 +59,4 @@ export class ProductsController {
   }
 }
 
-export default ProductsController; // Adicione essa linha
+export default ProductsController;
