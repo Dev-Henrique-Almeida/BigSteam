@@ -38,7 +38,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"Cyberpunk 2077\",\r\n  \"description\": \"Cyberpunk 2077 é um RPG de ação e aventura em mundo aberto ambientado na megalópole de Night City, onde você é um mercenário cyberpunk envolvido em uma intensa luta pela sobrevivência. Com diversas melhorias e conteúdo adicional gratuito, personalize o seu personagem e o seu estilo de jogo conforme aceita trabalhos, construa uma reputação e desbloqueie melhorias. Seus relacionamentos e suas escolhas moldarão a história e o mundo ao seu redor. Aqui nascem as lendas. Qual será a sua?\",\r\n  \"releaseDate\": \"09-12-2020\",\r\n  \"price\": 99.95,\r\n  \"category\": \"Ação\"\r\n}\r\n",
+							"raw": "{\r\n  \"title\": \"Cyberpunk 2077\",\r\n  \"description\": \"Cyberpunk 2077 é um RPG de ação e aventura em mundo aberto ambientado na megalópole de Night City, onde você é um mercenário cyberpunk envolvido em uma intensa luta pela sobrevivência. Com diversas melhorias e conteúdo adicional gratuito, personalize o seu personagem e o seu estilo de jogo conforme aceita trabalhos, construa uma reputação e desbloqueie melhorias. Seus relacionamentos e suas escolhas moldarão a história e o mundo ao seu redor. Aqui nascem as lendas. Qual será a sua?\",\r\n  \"releaseDate\": \"09-12-2020\",\r\n  \"price\": 99.95,\r\n  \"stock\": 10,\r\n  \"category\": \"Ação\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,6 +54,45 @@
 							"port": "3000",
 							"path": [
 								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createManyProducts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n  \"title\": \"Cyberpunk 2077\",\r\n  \"description\": \"Cyberpunk 2077 é um RPG de ação e aventura em mundo aberto ambientado na megalópole de Night City, onde você é um mercenário cyberpunk envolvido em uma intensa luta pela sobrevivência. Com diversas melhorias e conteúdo adicional gratuito, personalize o seu personagem e o seu estilo de jogo conforme aceita trabalhos, construa uma reputação e desbloqueie melhorias. Seus relacionamentos e suas escolhas moldarão a história e o mundo ao seu redor. Aqui nascem as lendas. Qual será a sua?\",\r\n  \"releaseDate\": \"09-12-2020\",\r\n  \"price\": 99.95,\r\n  \"stock\": 10,\r\n  \"category\": \"Ação\"\r\n    },\r\n  {\r\n    \"title\": \"ARK: Survival Evolved\",\r\n    \"description\": \"Como um homem ou uma mulher abandonado nu, congelando e morrendo de fome nas margens de uma misteriosa ilha chamada ARK, você precisa caçar, recolher recursos, construir itens, cultivar, pesquisar tecnologias, e construir abrigos para resistir aos elementos. Use sua astúcia e recursos para matar ou domar & criar os dinossauros leviathans e outras criaturas primitivas andando por aí. Se agrupe ou ataque centenas de outros jogadores para sobreviver, dominar... e escapar!\",\r\n    \"releaseDate\": \"27-08-2017\",\r\n    \"price\": 46.99,\r\n    \"category\": \"Sobrevivência\",\r\n    \"stock\": 30\r\n    },\r\n  {\r\n    \"title\": \"Assassin's Creed 2\",\r\n    \"description\": \"Assassin’s Creed® 2 é a continuação do título que se tornou o novo IP de venda mais rápida na história dos videogames. O tão aguardado título apresenta um novo herói, Ezio Auditore da Firenze, um jovem nobre italiano, e uma nova era, a Renascença. Assassin’s Creed 2 mantém a experiência de jogo central que fez da primeira obra um sucesso retumbante e apresenta novas experiências que irão surpreender e desafiar os jogadores. Assassin’s Creed 2 é uma história épica de família, vingança e conspiração ambientada no cenário imaculado, mas brutal, de uma Itália renascentista. Ezio faz amizade com Leonardo da Vinci, enfrenta as famílias mais poderosas de Florença e aventura-se pelos canais de Veneza, onde aprende a se tornar um mestre assassino.\",\r\n    \"releaseDate\": \"09-03-2010\",\r\n    \"price\": 17.99,\r\n    \"category\": \"Sobrevivência\",\r\n    \"stock\": 30\r\n    },\r\n  {\r\n    \"title\": \"Assassin’s Creed® Brotherhood\",\r\n    \"description\": \"Viva e respire como Ezio, um lendário Mestre Assassino, em sua luta duradoura contra a poderosa Ordem dos Templários. Ele deve viajar até a maior cidade da Itália, Roma, centro do poder, da ganância e da corrupção, para atacar o coração do inimigo. Derrotar os tiranos corruptos ali entrincheirados exigirá não apenas força, mas também liderança, já que Ezio comanda uma Irmandade inteira que se unirá ao seu lado. Somente trabalhando juntos os Assassinos poderão derrotar seus inimigos mortais. E pela primeira vez, introduzindo uma camada multijogador premiada que permite escolher entre uma ampla variedade de personagens únicos, cada um com suas próprias armas e técnicas de assassinato, e combinar suas habilidades com outras jogadores de todo o mundo. É hora de se juntar à Irmandade.\",\r\n    \"releaseDate\": \"22-03-2011\",\r\n    \"price\": 23.99,\r\n    \"category\": \"Aventura\",\r\n    \"stock\": 30\r\n    },\r\n    {\r\n    \"title\": \"Assassin's Creed® Revelations\",\r\n    \"description\": \"Quando um homem vence todas as suas batalhas e derrota todos os seus inimigos; o que resta a ele para alcançar? Ezio Auditore deve deixar sua vida para trás em busca de respostas... Em busca da verdade. Em Assassin’s Creed® Revelations, o mestre assassino Ezio Auditore segue os passos do lendário mentor Altair, em uma jornada de descobertas e revelações. É um caminho perigoso – que levará Ezio a Constantinopla, o coração do Império Otomano, onde um crescente exército de Templários ameaça desestabilizar a região.\",\r\n    \"releaseDate\": \"29-11-2011\",\r\n    \"price\": 27.99,\r\n    \"category\": \"Aventura\",\r\n    \"stock\": 20\r\n    },\r\n     {\r\n    \"title\": \"Assassin’s Creed® IV Black Flag™\",\r\n    \"description\": \"O ano é 1715. Os piratas governam as Caraíbas e estabeleceram a sua própria República sem lei, onde a corrupção, a ganância e a crueldade são comuns.Entre esses bandidos está um jovem e impetuoso capitão chamado Edward Kenway. Sua luta pela glória lhe rendeu o respeito de lendas como Barba Negra, mas também o atraiu para a antiga guerra entre Assassinos e Templários, uma guerra que pode destruir tudo o que os piratas construíram. Bem-vindo à Era de Ouro da Pirataria.\",\r\n    \"releaseDate\": \"19-10-2013\",\r\n    \"price\": 41.99,\r\n    \"category\": \"Aventura\",\r\n    \"stock\": 35\r\n    },\r\n     {\r\n    \"title\": \"Assetto Corsa\",\r\n    \"description\": \"SIMULADOR DE CORRIDAS DE ÚLTIMA GERAÇÃO: Assetto Corsa possui um motor gráfico DirectX 11 avançado, que reproduz um ambiente imersivo, iluminação dinâmica e materiais e superfícies realistas. O sistema de física avançado é projetado para gerar uma experiência de direção bastante realista, incluindo funções e aspectos de carros reais, nunca antes vistos em outros simuladores de corridas. Isso inclui bandas de rodagem, ciclos de resfriamento, degradação e vesiculação, simulação aerodinâmica altamente avançada, com partes móveis acionáveis em tempo real por canais de telemetria, sistemas híbridos de recuperação cinética e simulação de recuperação de energia. Extremamente detalhado, com opções para um ou diversos jogadores, carros licenciados exclusivos reproduzidos com a maior exatidão possível, graças à cooperação oficial com produtoras de veículos reais. ASSETTO CORSA foi desenvolvido no KUNOS Simulazioni R&D Office, localizado dentro do circuito internacional de corrida de Vallelunga, o que possibilitou que o jogo fosse desenvolvido conjuntamente com pilotos e equipes de pilotagem reais.\",\r\n    \"releaseDate\": \"19-12-2014\",\r\n    \"price\": 59.99,\r\n    \"category\": \"Corrida\",\r\n    \"stock\": 35\r\n    },\r\n     {\r\n    \"title\": \"Back 4 Blood\",\r\n    \"description\": \"Back 4 Blood é um jogo de tiro em primeira pessoa dos criadores da franquia aclamada pela crítica Left 4 Dead. Você está no centro de uma guerra contra os contagiados. Esses humanos portadores de um parasita mortal se transformaram em criaturas assustadoras inclinadas a devorar os restos da civilização. Com a extinção da humanidade em jogo, cabe a você e seus amigos enfrentar esse inimigo, erradicar os corrompidos e reconquistar o mundo.\",\r\n    \"releaseDate\": \"12-10-2021\",\r\n    \"price\": 25.99,\r\n    \"category\": \"Zumbis\",\r\n    \"stock\": 35\r\n    },\r\n     {\r\n    \"title\": \"Bully: Scholarship Edition\",\r\n    \"description\": \"Bully: Scholarship Edition se passa em uma escola fictícia em New England, Bullworth Academy, e conta a história de Jimmy Hopkins, um adolescente malandro de 15 anos que passa pela hilaridade e pela estranheza da adolescência. Acabe com os esportistas jogando queimada, sacaneie as patricinhas, salve os nerds, beije a garota e, por fim, navegue pela hierarquia social da pior escola das redondezas.\",\r\n    \"releaseDate\": \"21-10-2008\",\r\n    \"price\": 39.99,\r\n    \"category\": \"Aventura\",\r\n    \"stock\": 50\r\n    },\r\n     {\r\n    \"title\": \"Blasphemous\",\r\n    \"description\": \"Uma horrível maldição, conhecida apenas como O Milagre, caiu sobre a terra de Cvstodia e a sua população. Jogue como o Penitente — o único sobrevivente do massacre do “Sofrimento Silencioso”. Preso em um ciclo sem fim de morte e renascimento, cabe a você libertar o mundo deste terrível destino e alcançar a origem de sua angústia. Explore esse mundo aterrorizante de religião distorcida e descubra seus diversos e profundos segredos. Realize combos devastadores e execuções brutais para abater as hordas de monstros grotescos e chefes titânicos, prontos para dilacerarem seus membros, um de cada vez. Encontre e equipe-se com relíquias, contas de rosário e orações que invocam os poderes dos céus para lhe auxiliarem em sua jornada para se livrar da condenação eterna.\",\r\n    \"releaseDate\": \"10-09-2019\",\r\n    \"price\": 69.99,\r\n    \"category\": \"SoulsLike\",\r\n    \"stock\": 50\r\n    },\r\n     {\r\n    \"title\": \"Call of Duty®: Black Ops Cold War\",\r\n    \"description\": \"Black Ops Cold War, a sequência direta de Call of Duty®: Black Ops, mergulha os fãs nas profundezas da volátil batalha geopolítica da Guerra Fria no início dos anos 80. Nada é o que parece em uma emocionante Campanha para um jogador, em que os jogadores ficarão frente a frente com figuras históricas e verdades inconvenientes em batalhas ao redor do mundo, passando por locais emblemáticos como Berlim Oriental, Vietnã, Turquia, a sede da KGB soviética e muito mais.\",\r\n    \"releaseDate\": \"08-03-2023\",\r\n    \"price\": 89.99,\r\n    \"category\": \"FPS\",\r\n    \"stock\": 31\r\n    },\r\n     {\r\n    \"title\": \"Counter-Strike 2\",\r\n    \"description\": \"Há mais de duas décadas, o Counter-Strike oferece uma experiência competitiva de elite moldada por milhões de jogadores mundialmente. Agora, o próximo capítulo da história do CS vai começar. Isso é Counter-Strike 2.\",\r\n    \"releaseDate\": \"21-08-2012\",\r\n    \"price\": 39.99,\r\n    \"category\": \"FPS\",\r\n    \"stock\": 31\r\n    },\r\n     {\r\n    \"title\": \"Cuphead\",\r\n    \"description\": \"Cuphead é um jogo de ação e tiros clássico, com enorme ênfase nas batalhas de chefes. Inspirado nas animações infantis da década de 1930, os visuais e efeitos sonoros foram minuciosamente recriados com as mesmíssimas técnicas dessa era, com destaque para desenhos feitos à mão, fundos em aquarela e gravações originais de jazz.\",\r\n    \"releaseDate\": \"29-09-2017\",\r\n    \"price\": 36.99,\r\n    \"category\": \"2D\",\r\n    \"stock\": 15\r\n    },\r\n     {\r\n    \"title\": \"Dead Cells\",\r\n    \"description\": \"Este é um jogo de plataforma de ação no qual os jogadores controlam um cadáver reanimado tentando escapar de uma prisão em uma ilha. De uma perspectiva de rolagem lateral, os jogadores exploram ambientes de plataforma enquanto se envolvem em combates corpo a corpo frenéticos contra criaturas fantásticas (por exemplo, esqueletos, sanguessugas gigantes, goblins). Os jogadores usam socos, chutes e dispositivos (por exemplo, armadilhas lança-chamas, granadas, torres de flechas) para matar os inimigos. Os inimigos emitem grandes respingos de sangue quando feridos/mortos e às vezes se quebram em pedaços sangrentos; o sangue também mancha o chão e as paredes de algumas áreas.\",\r\n    \"releaseDate\": \"06-08-2018\",\r\n    \"price\": 27.99,\r\n    \"category\": \"SoulsLike\",\r\n    \"stock\": 20\r\n    },\r\n     {\r\n    \"title\": \"Dead Island: Riptide Definitive Edition\",\r\n    \"description\": \"Bem-vindo à experiência de apocalipse zumbi de sua vida – e agora mais linda do que nunca. Preso no meio de um surto épico de zumbis na ilha tropical de Banoi, seu único pensamento é: sobreviver!\",\r\n    \"releaseDate\": \"31-05-2016\",\r\n    \"price\": 35.99,\r\n    \"category\": \"Zumbis\",\r\n    \"stock\": 20\r\n    },\r\n     {\r\n    \"title\": \"Dead Island Definitive Edition\",\r\n    \"description\": \"Bem-vindo à experiência de apocalipse zumbi de sua vida – e agora mais linda do que nunca. Preso no meio de um surto épico de zumbis na ilha tropical de Banoi, seu único pensamento é: sobreviver!\",\r\n    \"releaseDate\": \"31-05-2016\",\r\n    \"price\": 32.99,\r\n    \"category\": \"Zumbis\",\r\n    \"stock\": 20\r\n    },\r\n     {\r\n    \"title\": \"Dead Island Definitive Edition\",\r\n    \"description\": \"Bem-vindo à experiência de apocalipse zumbi de sua vida – e agora mais linda do que nunca. Preso no meio de um surto épico de zumbis na ilha tropical de Banoi, seu único pensamento é: sobreviver!\",\r\n    \"releaseDate\": \"31-05-2016\",\r\n    \"price\": 32.99,\r\n    \"category\": \"Zumbis\",\r\n    \"stock\": 20\r\n    },\r\n     {\r\n    \"title\": \"Devil May Cry 5\",\r\n    \"description\": \"O melhor caçador de demônios está de volta com estilo, no jogo que os fãs de ação estavam esperando. Um novo episódio na lendária série de ação, Devil May Cry 5 traz junto sua clássica mistura de ação turbinada com personagens originais de outro mundo e a mais nova tecnologia de jogos Capcom para trazer uma obra de arte de ação e aventura visualmente inovadora.\",\r\n    \"releaseDate\": \"07-03-2019\",\r\n    \"price\": 35.99,\r\n    \"category\": \"Ação\",\r\n    \"stock\": 20\r\n    },\r\n     {\r\n    \"title\": \"ELDEN RING\",\r\n    \"description\": \"O NOVO RPG DE AÇÃO E FANTASIA: Levante-se, Maculado, e seja guiado pela graça para portar o poder do Anel Prístino e se tornar um Lorde Prístino nas Terras Intermédias.• Um mundo vasto e emocionante: Um mundo vasto onde campos abertos e uma variedade de situações e masmorras imensas, com complexos designs tridimensionais se conectam com fluidez. Conforme explora, sinta a alegria de descobrir poderosas e desconhecidas ameaças que aguardam por você, levando a um grande senso de conquista. • Crie seu próprio personagem: Além de personalizar a aparência do seu personagem, você pode combinar livremente armas, armaduras e magias que equipar. Você pode desenvolver seu personagem de acordo com seu estilo de jogo, como aumentar a força muscular para se tornar um poderoso guerreiro, ou dominar a magia. • Um drama épico nascido de um mito: Uma história cheia de camadas, contada em fragmentos. Um drama épico onde os vários pensamentos dos personagens se interligam nas Terras Intermédias. • Jogo on-line único que conecta você livremente aos outros: Além do multijogador, onde você pode se conectar diretamente com outros jogadores e viajarem juntos, o jogo suporta um elemento on-line assíncrono único que permite que você sinta a presença dos outros.\",\r\n    \"releaseDate\": \"24-02-2022\",\r\n    \"price\": 229.99,\r\n    \"category\": \"SoulsLike\",\r\n    \"stock\": 40\r\n    },\r\n     {\r\n    \"title\": \"God of War\",\r\n    \"description\": \"Adentre o reino nórdico: Com a vingança contra os deuses do Olimpo em um passado distante, Kratos agora vive como um mortal no reino dos deuses e monstros nórdicos. É nesse mundo duro e implacável que ele deve lutar para sobreviver... e ensinar seu filho a fazer o mesmo.\",\r\n    \"releaseDate\": \"14-01-2022\",\r\n    \"price\": 199.99,\r\n    \"category\": \"Ação\",\r\n    \"stock\": 40\r\n    }\r\n\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"all"
 							]
 						}
 					},
@@ -104,7 +143,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/products/5",
+							"raw": "http://localhost:3000/products/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -112,7 +151,7 @@
 							"port": "3000",
 							"path": [
 								"products",
-								"5"
+								"2"
 							]
 						}
 					},
@@ -143,7 +182,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/products/5",
+							"raw": "http://localhost:3000/products/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -151,7 +190,7 @@
 							"port": "3000",
 							"path": [
 								"products",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -173,7 +212,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/products/bulk",
+							"raw": "http://localhost:3000/products/all",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -181,7 +220,7 @@
 							"port": "3000",
 							"path": [
 								"products",
-								"bulk"
+								"all"
 							]
 						}
 					},
@@ -203,7 +242,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/products/5",
+							"raw": "http://localhost:3000/products/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -211,46 +250,7 @@
 							"port": "3000",
 							"path": [
 								"products",
-								"5"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "createManyProducts",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n  {\r\n    \"title\": \"Jogo 1\",\r\n    \"description\": \"Descrição do jogo 1\",\r\n    \"releaseDate\": \"22-05-2020\",\r\n    \"price\": 59.99,\r\n    \"category\": \"Ação\"\r\n  },\r\n  {\r\n    \"title\": \"Jogo 2\",\r\n    \"description\": \"Descrição do jogo 2\",\r\n    \"releaseDate\": \"23-06-2021\",\r\n    \"price\": 49.99,\r\n    \"category\": \"Aventura\"\r\n  }\r\n]\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/products/bulk",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"products",
-								"bulk"
+								"1"
 							]
 						}
 					},
@@ -268,7 +268,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"teste User\",\r\n  \"email\": \"teste2@example.com\",\r\n  \"password\": \"password123\",\r\n  \"role\": \"USER\"\r\n}\r\n",
+							"raw": "{\r\n  \"name\": \"Teste User\",\r\n  \"email\": \"teste@example.com\",\r\n  \"password\": \"password123\",\r\n  \"role\": \"USER\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -315,7 +315,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+							"raw": "{\r\n  \"email\": \"teste@example.com\",\r\n  \"password\": \"password123\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -332,6 +332,45 @@
 							"path": [
 								"users",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByEmailUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"teste@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"email"
 							]
 						}
 					},
@@ -382,7 +421,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/4",
+							"raw": "http://localhost:3000/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -390,14 +429,14 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"4"
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "getByEmailUsers",
+					"name": "updateUser",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -409,11 +448,11 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"regular@example.com\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Teste User\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -421,7 +460,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/email",
+							"raw": "http://localhost:3000/users/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -429,7 +468,7 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"email"
+								"1"
 							]
 						}
 					},
@@ -451,7 +490,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/3",
+							"raw": "http://localhost:3000/users/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -459,7 +498,7 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -490,6 +529,203 @@
 							"path": [
 								"users",
 								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "addProductsCart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productId\":32,\r\n  \"quantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cart/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductsCart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clearCart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/cart/clear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cart",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "createOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/orders/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllOrders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clearOrders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/orders/clear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"orders",
+								"clear"
 							]
 						}
 					},
