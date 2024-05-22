@@ -2,19 +2,16 @@ import {
   Injectable,
   CanActivate,
   ExecutionContext,
-  Inject,
-  forwardRef,
+  ForbiddenException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { ROLES_KEY } from './roles.decorator';
 import { JwtService } from '@nestjs/jwt';
-import { ForbiddenRoleException } from '../common/exceptions/erro-permissao.exception';
+import { ROLES_KEY } from './roles.decorator';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
-    @Inject(forwardRef(() => JwtService))
     private jwtService: JwtService,
   ) {}
 
@@ -27,12 +24,14 @@ export class RolesGuard implements CanActivate {
       return true;
     }
     const request = context.switchToHttp().getRequest();
-    const token = request.headers.authorization.split(' ')[1];
-    const user = this.jwtService.decode(token);
+    const user = request.user;
 
-    if (!requiredRoles.includes(user['role'])) {
-      throw new ForbiddenRoleException();
+    if (!requiredRoles.some((role) => user.role?.includes(role))) {
+      throw new ForbiddenException(
+        'Você não tem permissão para acessar este recurso',
+      );
     }
+
     return true;
   }
 }

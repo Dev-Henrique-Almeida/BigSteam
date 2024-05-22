@@ -62,6 +62,16 @@
 				{
 					"name": "getAllProducts",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -81,10 +91,20 @@
 				{
 					"name": "getByIdProducts",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/products/2",
+							"raw": "http://localhost:3000/products/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -92,7 +112,7 @@
 							"port": "3000",
 							"path": [
 								"products",
-								"2"
+								"5"
 							]
 						}
 					},
@@ -101,6 +121,16 @@
 				{
 					"name": "updateProducts",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -113,7 +143,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/products/1",
+							"raw": "http://localhost:3000/products/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -121,7 +151,7 @@
 							"port": "3000",
 							"path": [
 								"products",
-								"1"
+								"5"
 							]
 						}
 					},
@@ -143,14 +173,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/products",
+							"raw": "http://localhost:3000/products/bulk",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"products"
+								"products",
+								"bulk"
 							]
 						}
 					},
@@ -159,10 +190,20 @@
 				{
 					"name": "deleteProduct",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/products/1",
+							"raw": "http://localhost:3000/products/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -170,7 +211,7 @@
 							"port": "3000",
 							"path": [
 								"products",
-								"1"
+								"5"
 							]
 						}
 					},
@@ -179,6 +220,16 @@
 				{
 					"name": "createManyProducts",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -217,7 +268,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Regular User\",\r\n  \"email\": \"regular@example.com\",\r\n  \"password\": \"password123\",\r\n  \"role\": \"USER\"\r\n}\r\n",
+							"raw": "{\r\n  \"name\": \"teste User\",\r\n  \"email\": \"teste2@example.com\",\r\n  \"password\": \"password123\",\r\n  \"role\": \"USER\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -281,6 +332,164 @@
 							"path": [
 								"users",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByIdUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByEmailUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"regular@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAllUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"all"
 							]
 						}
 					},

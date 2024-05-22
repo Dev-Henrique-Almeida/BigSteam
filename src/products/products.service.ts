@@ -1,96 +1,75 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Product, Prisma } from '@prisma/client';
-import { parse, format } from 'date-fns';
-
-export interface FormattedProduct {
-  id: number;
-  title: string;
-  description: string;
-  releaseDate: string;
-  price: number;
-  category: string;
-}
+import { NotFoundException } from '../common/exceptions/not-found.exception';
+import { CreationFailedException } from '../common/exceptions/creation-failed.exception';
 
 @Injectable()
 export class ProductsService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(): Promise<FormattedProduct[]> {
+  async create(data: Prisma.ProductCreateInput): Promise<Product> {
+    try {
+      return await this.prisma.product.create({ data });
+    } catch (error) {
+      throw new CreationFailedException('Falha ao criar um novo produto!');
+    }
+  }
+
+  async createMany(data: Prisma.ProductCreateInput[]): Promise<Product[]> {
+    try {
+      const createdProducts = await Promise.all(
+        data.map((product) => this.prisma.product.create({ data: product })),
+      );
+      if (createdProducts.length === 0) {
+        throw new CreationFailedException('Falha ao criar novos produtos!');
+      }
+      return createdProducts;
+    } catch (error) {
+      throw new CreationFailedException('Falha ao criar novos produtos!');
+    }
+  }
+
+  async findAll(): Promise<Product[]> {
     const products = await this.prisma.product.findMany();
-    return products.map((product) => ({
-      ...product,
-      releaseDate: format(product.releaseDate, 'dd-MM-yyyy'),
-    }));
+    if (products.length === 0) {
+      throw new NotFoundException('Nenhum produto foi encontrado!');
+    }
+    return products;
   }
 
-  async findOne(id: number): Promise<FormattedProduct> {
+  async findOne(id: number): Promise<Product> {
     const product = await this.prisma.product.findUnique({ where: { id } });
-    return {
-      ...product,
-      releaseDate: format(product.releaseDate, 'dd-MM-yyyy'),
-    };
-  }
-
-  async create(data: Prisma.ProductCreateInput): Promise<FormattedProduct> {
-    data.releaseDate = parse(
-      data.releaseDate as unknown as string,
-      'dd-MM-yyyy',
-      new Date(),
-    );
-    const product = await this.prisma.product.create({ data });
-    return {
-      ...product,
-      releaseDate: format(product.releaseDate, 'dd-MM-yyyy'),
-    };
-  }
-
-  async createMany(
-    data: Prisma.ProductCreateInput[],
-  ): Promise<FormattedProduct[]> {
-    const createdProducts = [];
-    for (const productData of data) {
-      productData.releaseDate = parse(
-        productData.releaseDate as unknown as string,
-        'dd-MM-yyyy',
-        new Date(),
-      );
-      const product = await this.prisma.product.create({ data: productData });
-      createdProducts.push({
-        ...product,
-        releaseDate: format(product.releaseDate, 'dd-MM-yyyy'),
-      });
+    if (!product) {
+      throw new NotFoundException(`Produto com ID ${id}, não encontrado!`);
     }
-    return createdProducts;
+    return product;
   }
 
-  async update(
-    id: number,
-    data: Prisma.ProductUpdateInput,
-  ): Promise<FormattedProduct> {
-    if (data.releaseDate) {
-      data.releaseDate = parse(
-        data.releaseDate as unknown as string,
-        'dd-MM-yyyy',
-        new Date(),
-      );
+  async update(id: number, data: Prisma.ProductUpdateInput): Promise<Product> {
+    const product = await this.prisma.product.update({
+      where: { id },
+      data,
+    });
+    if (!product) {
+      throw new NotFoundException(`Produto com ID ${id}, não encontrado!`);
     }
-    const product = await this.prisma.product.update({ where: { id }, data });
-    return {
-      ...product,
-      releaseDate: format(product.releaseDate, 'dd-MM-yyyy'),
-    };
+    return product;
   }
 
-  async remove(id: number): Promise<FormattedProduct> {
+  async remove(id: number): Promise<Product> {
     const product = await this.prisma.product.delete({ where: { id } });
-    return {
-      ...product,
-      releaseDate: format(product.releaseDate, 'dd-MM-yyyy'),
-    };
+    if (!product) {
+      throw new NotFoundException(`Produto com ID ${id}, não encontrado!`);
+    }
+    return product;
   }
 
-  async removeAll(): Promise<void> {
-    await this.prisma.product.deleteMany({});
+  async removeAll(): Promise<{ count: number }> {
+    const result = await this.prisma.product.deleteMany({});
+    if (result.count === 0) {
+      throw new NotFoundException('Nenhum produto encontrado para deletar!');
+    }
+    return result;
   }
 }
