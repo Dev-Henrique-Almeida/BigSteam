@@ -66,7 +66,7 @@ npm run start:dev
 #### Usuários
 - Cadastro de novos usuários.
 - Login de usuários existentes.
-- Diferentes níveis de acesso: Administradores podem gerenciar produtos, os quais tem como roles:"ADMIN", enquanto usuários comuns podem apenas comprar e visualizar jogos, tendo como roles:"USER".
+- Diferentes níveis de acesso: Administradores podem gerenciar produtos, os quais tem como role:"ADMIN", enquanto usuários comuns podem apenas comprar e visualizar jogos, tendo como role:"USER".
 - Cada usuário possui um carrinho de compras individual.
 - Os administradores têm privilégios adicionais para adicionar, atualizar e remover produtos.
 
