@@ -81,7 +81,8 @@ src/
 ├── orders/             # Gerenciamento de pedidos
 ├── prisma/             # Configurações do Prisma
 ├── products/           # Gerenciamento de produtos
-└── users/              # Gerenciamento de usuários
+├── users/              # Gerenciamento de usuários
+└── storage/            # Pasta onde possui o importe para todos os endpoints no postman, onde basta abrir o postman e importar esse arquivo
 
 ```
 
