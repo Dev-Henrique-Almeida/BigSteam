@@ -16,7 +16,7 @@ import { AuthService } from '../auth/auth.service';
 import { Roles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { RequestWithUser } from '../auth/interfaces/request-with-user';
+import { RequestWithUser } from '../auth/interfaces/request-with-user.interface';
 
 @Controller('users')
 export class UsersController {
