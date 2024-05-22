@@ -1,4 +1,4 @@
-import { Controller, Post, Get, UseGuards, Req } from '@nestjs/common';
+import { Controller, Post, Get, UseGuards, Req, Delete } from '@nestjs/common';
 import { OrdersService } from './order.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RequestWithUser } from '../auth/interfaces/request-with-user.interface';
@@ -16,5 +16,10 @@ export class OrdersController {
   @Get()
   getOrders(@Req() req: RequestWithUser) {
     return this.ordersService.getOrders(req.user);
+  }
+
+  @Delete('clear')
+  clearOrders(@Req() req: RequestWithUser) {
+    return this.ordersService.clearOrders(req.user);
   }
 }

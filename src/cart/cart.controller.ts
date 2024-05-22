@@ -1,4 +1,12 @@
-import { Controller, Post, Get, Body, UseGuards, Req } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Body,
+  UseGuards,
+  Req,
+  Delete,
+} from '@nestjs/common';
 import { CartService } from './cart.service';
 import { AddToCartDto } from './dtos/add-to-cart.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -19,7 +27,7 @@ export class CartController {
     return this.cartService.getCart(req.user);
   }
 
-  @Post('clear')
+  @Delete('clear')
   clearCart(@Req() req: RequestWithUser) {
     return this.cartService.clearCart(req.user);
   }

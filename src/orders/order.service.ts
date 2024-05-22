@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { User, Order } from '@prisma/client';
+import { NotFoundException } from 'src/common/exceptions/not-found.exception';
 
 @Injectable()
 export class OrdersService {
@@ -67,5 +68,27 @@ export class OrdersService {
       where: { userId: user.id },
       include: { items: { include: { product: true } } },
     });
+  }
+
+  async clearOrders(user: User): Promise<{ count: number }> {
+    const orders = await this.prisma.order.findMany({
+      where: { userId: user.id },
+    });
+
+    const orderIds = orders.map((order) => order.id);
+
+    await this.prisma.orderItem.deleteMany({
+      where: { orderId: { in: orderIds } },
+    });
+
+    const deletedOrders = await this.prisma.order.deleteMany({
+      where: { userId: user.id },
+    });
+
+    if (deletedOrders.count === 0) {
+      throw new NotFoundException('Nenhum pedido encontrado para deletar!');
+    }
+
+    return { count: deletedOrders.count };
   }
 }

@@ -2,6 +2,7 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AddToCartDto } from './dtos/add-to-cart.dto';
 import { CartItem, User } from '@prisma/client';
+import { NotFoundException } from 'src/common/exceptions/not-found.exception';
 
 @Injectable()
 export class CartService {
@@ -53,8 +54,16 @@ export class CartService {
   }
 
   async clearCart(user: User) {
-    return this.prisma.cartItem.deleteMany({
+    const result = await this.prisma.cartItem.deleteMany({
       where: { userId: user.id },
     });
+
+    if (result.count === 0) {
+      throw new NotFoundException(
+        'Nenhum item no carrinho encontrado para deletar!',
+      );
+    }
+
+    return result;
   }
 }

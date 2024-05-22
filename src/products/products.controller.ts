@@ -26,13 +26,13 @@ export class ProductsController {
     return this.productsService.create(createProductDto);
   }
 
-  @Post('bulk')
+  @Post('all')
   @Roles('ADMIN')
   createMany(@Body() createProductsDto: CreateProductDto[]) {
     return this.productsService.createMany(createProductsDto);
   }
 
-  @Delete('bulk')
+  @Delete('all')
   @Roles('ADMIN')
   removeAll() {
     return this.productsService.removeAll();
