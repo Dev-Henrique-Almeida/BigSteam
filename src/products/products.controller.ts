@@ -2,61 +2,59 @@ import {
   Controller,
   Get,
   Post,
+  Put,
+  Delete,
   Body,
   Param,
-  Delete,
-  Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { UpdateProductDto } from './dtos/update-product.dto';
-import { FormattedProduct } from './products.service';
+import { Roles } from '../auth/roles.decorator';
+import { RolesGuard } from '../auth/roles.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('products')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @Get()
-  findAll(): Promise<FormattedProduct[]> {
-    return this.productsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string): Promise<FormattedProduct> {
-    return this.productsService.findOne(Number(id));
-  }
-
   @Post()
-  create(
-    @Body() createProductDto: CreateProductDto,
-  ): Promise<FormattedProduct> {
+  @Roles('ADMIN')
+  create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
 
   @Post('bulk')
-  createMany(
-    @Body() createProductDtos: CreateProductDto[],
-  ): Promise<FormattedProduct[]> {
-    return this.productsService.createMany(createProductDtos);
+  @Roles('ADMIN')
+  createMany(@Body() createProductsDto: CreateProductDto[]) {
+    return this.productsService.createMany(createProductsDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string): Promise<FormattedProduct> {
-    return this.productsService.remove(Number(id));
-  }
-
-  @Delete()
-  removeAll(): Promise<void> {
+  @Delete('bulk')
+  @Roles('ADMIN')
+  removeAll() {
     return this.productsService.removeAll();
   }
 
+  @Get()
+  findAll() {
+    return this.productsService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.productsService.findOne(+id);
+  }
+
   @Put(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateProductDto: UpdateProductDto,
-  ): Promise<FormattedProduct> {
-    return this.productsService.update(Number(id), updateProductDto);
+  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
+    return this.productsService.update(+id, updateProductDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.productsService.remove(+id);
   }
 }
-
-export default ProductsController;
