@@ -41,10 +41,36 @@ npx prisma migrate dev
 ```bash
 npm run start:dev
 ```
+### 🛠️ Como Usar
+
+1 - Ao clonar o projeto e acessar o postman com o arquivo que esta localizado:
+```bash
+-> src/storage/postman
+```
+2 - O usuário deve criar uma conta com role sendo "ADMIN" para a criação de produtos, e um outro usuário com role "USER", para a criação de pedidos.
+3 - Ao criar um usuário ADMIN, o mesmo deve logar com essa conta, e pode estar criando pedidos, onde tem um endpoint com alguns produtos já pré-inseridos para teste.
+4 - Seguindo, deve-se logar com a conta com "USER", e adicionar os produtos ao carrinho, da seguinte forma:
+```bash
+Exemplo com apenas 1 produtos, com quantidade escolhida como 1:
+{
+  "productId":[1],
+  "quantity": [1]
+}
+
+Exemplo com 3 produtos, com quantidade escolhidas:
+{
+  "productId":[1, 2, 3],
+  "quantity": [1, 3, 4]
+}
+```
+5 - Por fim, é só seguir para a criação de um pedido.
+
 ### 🛠️ Funcionalidades
 
 #### Produtos
-- Visualize uma lista de jogos disponíveis.
+- Visualize uma lista de produtos disponíveis.
+- Visualize os detalhes de um produto.
+- Visualize a imagem de um produto.
 - Adicione novos jogos ao sistema (somente para administradores).
 - Atualize as informações dos jogos existentes (somente para administradores).
 - Remova jogos do sistema (somente para administradores).
@@ -93,12 +119,13 @@ src/
 - **POST /auth/login** - Login de um usuário.
   
 #### Produtos
+- **POST /products** - Adicionar um novo produto (somente ADMIN).
+- **POST /products/all** - Adicionar múltiplos produtos (somente ADMIN).
 - **GET /products** - Listar todos os produtos.
 - **GET /products/:id** - Obter detalhes de um produto.
-- **POST /products** - Adicionar um novo produto (somente ADMIN).
+- **GET /products/:id/image** - Obter a imagem de um produto.
 - **PUT /products/:id** - Atualizar um produto (somente ADMIN).
 - **DELETE /products/:id** - Remover um produto (somente ADMIN).
-- **POST /products/all** - Adicionar múltiplos produtos (somente ADMIN).
 - **DELETE /products/all** - Remover todos os produtos (somente ADMIN).
 
 #### Carrinho
