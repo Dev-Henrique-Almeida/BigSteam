@@ -14,6 +14,7 @@ import { UpdateProductDto } from './dtos/update-product.dto';
 import { Roles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { NotFoundException } from 'src/common/exceptions/not-found.exception';
 
 @Controller('products')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -46,6 +47,18 @@ export class ProductsController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productsService.findOne(+id);
+  }
+
+  @Get(':id/image')
+  findImage(@Param('id') id: string) {
+    return this.productsService.findOne(+id).then((product) => {
+      if (!product.imageUrl) {
+        throw new NotFoundException(
+          `Imagem do produto com ID ${id} não encontrada!`,
+        );
+      }
+      return { imageUrl: product.imageUrl };
+    });
   }
 
   @Put(':id')

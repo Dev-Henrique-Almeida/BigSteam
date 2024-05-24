@@ -67,6 +67,19 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException(`Usuário com ID: ${id}, não encontrado!`);
     }
+
+    await this.prisma.cartItem.deleteMany({
+      where: {
+        userId: id,
+      },
+    });
+
+    await this.prisma.order.deleteMany({
+      where: {
+        userId: id,
+      },
+    });
+
     return this.prisma.user.delete({
       where: { id },
     });
@@ -75,11 +88,6 @@ export class UsersService {
   async removeAllUsers(
     exceptUserId: number,
   ): Promise<{ idsRemovidos: number[] }> {
-    /*  console.log(
-      'Iniciando remoção de todos os usuários exceto o ID:',
-      exceptUserId,
-    ); */
-
     const usersToRemove = await this.prisma.user.findMany({
       where: {
         id: {
@@ -93,15 +101,32 @@ export class UsersService {
 
     const idsToRemove = usersToRemove.map((user) => user.id);
 
-    await this.prisma.user.deleteMany({
+    await this.prisma.cartItem.deleteMany({
       where: {
-        id: {
-          not: exceptUserId,
+        userId: {
+          in: idsToRemove,
         },
       },
     });
 
-    if (idsToRemove.length === 0) {
+    await this.prisma.order.deleteMany({
+      where: {
+        userId: {
+          in: idsToRemove,
+        },
+      },
+    });
+
+    // Remover os usuários
+    const result = await this.prisma.user.deleteMany({
+      where: {
+        id: {
+          in: idsToRemove,
+        },
+      },
+    });
+
+    if (result.count === 0) {
       throw new NotFoundException('Nenhum usuário encontrado para remoção!');
     }
 

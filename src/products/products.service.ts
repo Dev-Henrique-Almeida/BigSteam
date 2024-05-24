@@ -15,6 +15,9 @@ export class ProductsService {
       ...product,
       releaseDate: format(product.releaseDate, 'dd-MM-yyyy'),
       stock: product.stock,
+      isOnSale: product.isOnSale,
+      discountValue: product.discountValue ?? null,
+      imageUrl: product.imageUrl ?? null,
     };
   }
 
@@ -88,14 +91,32 @@ export class ProductsService {
   }
 
   async remove(id: number): Promise<Product> {
-    const product = await this.prisma.product.delete({ where: { id } });
+    const product = await this.prisma.product.findUnique({ where: { id } });
     if (!product) {
       throw new NotFoundException(`Produto com ID ${id}, não encontrado!`);
     }
-    return product;
+
+    await this.prisma.cartItem.deleteMany({
+      where: {
+        productId: id,
+      },
+    });
+
+    await this.prisma.orderItem.deleteMany({
+      where: {
+        productId: id,
+      },
+    });
+
+    return this.prisma.product.delete({
+      where: { id },
+    });
   }
 
   async removeAll(): Promise<{ count: number }> {
+    await this.prisma.cartItem.deleteMany({});
+    await this.prisma.orderItem.deleteMany({});
+
     const result = await this.prisma.product.deleteMany({});
     if (result.count === 0) {
       throw new NotFoundException('Nenhum produto encontrado para deletar!');

@@ -2,8 +2,10 @@ import {
   IsInt,
   IsNotEmpty,
   IsString,
-  IsDate,
   IsPositive,
+  IsBoolean,
+  IsNumber,
+  IsOptional,
 } from 'class-validator';
 
 export class CreateProductDto {
@@ -31,4 +33,16 @@ export class CreateProductDto {
   @IsInt()
   @IsPositive()
   stock: number;
+
+  @IsOptional()
+  @IsBoolean()
+  isOnSale?: boolean;
+
+  @IsOptional()
+  @IsNumber()
+  discountValue?: number;
+
+  @IsOptional()
+  @IsString()
+  imageUrl?: string;
 }

@@ -3,54 +3,77 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { AddToCartDto } from './dtos/add-to-cart.dto';
 import { CartItem, User } from '@prisma/client';
 import { NotFoundException } from 'src/common/exceptions/not-found.exception';
+import Big from 'big.js';
+import { format } from 'date-fns';
 
 @Injectable()
 export class CartService {
   constructor(private prisma: PrismaService) {}
 
-  async addToCart(user: User, addToCartDto: AddToCartDto): Promise<CartItem> {
+  async addToCart(user: User, addToCartDto: AddToCartDto): Promise<CartItem[]> {
     const { productId, quantity } = addToCartDto;
 
-    if (quantity <= 0) {
-      throw new BadRequestException('A quantidade deve ser maior que zero.');
+    if (productId.length !== quantity.length) {
+      throw new BadRequestException(
+        'Product IDs and quantities must have the same length.',
+      );
     }
 
-    const product = await this.prisma.product.findUnique({
-      where: { id: productId },
-    });
+    const cartItems: CartItem[] = [];
 
-    if (!product) {
-      throw new BadRequestException('Produto não encontrado.');
+    for (let i = 0; i < productId.length; i++) {
+      const product = await this.prisma.product.findUnique({
+        where: { id: productId[i] },
+      });
+
+      if (!product) {
+        throw new BadRequestException(
+          `Produto com ID ${productId[i]} não encontrado.`,
+        );
+      }
+
+      const totalQuantity = await this.prisma.cartItem.upsert({
+        where: {
+          userId_productId: { userId: user.id, productId: productId[i] },
+        },
+        update: { quantity: { increment: quantity[i] } },
+        create: {
+          userId: user.id,
+          productId: productId[i],
+          quantity: quantity[i],
+        },
+      });
+
+      cartItems.push(totalQuantity);
     }
 
-    const existingCartItem = await this.prisma.cartItem.findUnique({
-      where: { userId_productId: { userId: user.id, productId } },
-    });
-
-    const totalQuantity = existingCartItem
-      ? existingCartItem.quantity + quantity
-      : quantity;
-
-    if (totalQuantity > product.stock) {
-      throw new BadRequestException('Quantidade excede o estoque disponível.');
-    }
-
-    return this.prisma.cartItem.upsert({
-      where: { userId_productId: { userId: user.id, productId } },
-      update: { quantity: { increment: quantity } },
-      create: {
-        userId: user.id,
-        productId,
-        quantity,
-      },
-    });
+    return cartItems;
   }
 
   async getCart(user: User) {
-    return this.prisma.cartItem.findMany({
+    const cartItems = await this.prisma.cartItem.findMany({
       where: { userId: user.id },
       include: { product: true },
     });
+
+    const subtotal = cartItems.reduce((total, item) => {
+      const discount = new Big(item.product.discountValue ?? 0);
+      const price = new Big(item.product.price);
+      const finalPrice = price.minus(discount);
+      return total.plus(finalPrice.times(item.quantity));
+    }, new Big(0));
+
+    return {
+      items: cartItems.map((item) => ({
+        ...item,
+        product: {
+          ...item.product,
+          imageUrl: item.product.imageUrl,
+          releaseDate: format(new Date(item.product.releaseDate), 'dd-MM-yyyy'), // Incluindo a formatação da data
+        },
+      })),
+      subtotal: subtotal.toNumber(),
+    };
   }
 
   async clearCart(user: User) {

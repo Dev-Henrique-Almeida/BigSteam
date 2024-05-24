@@ -66,7 +66,7 @@ npm run start:dev
 #### Usuários
 - Cadastro de novos usuários.
 - Login de usuários existentes.
-- Diferentes níveis de acesso: Administradores podem gerenciar produtos, os quais tem como role:"ADMIN", enquanto usuários comuns podem apenas comprar e visualizar jogos, tendo como role:"USER".
+- Diferentes níveis de acesso: Administradores podem gerenciar produtos, os quais tem como roles:"ADMIN", enquanto usuários comuns podem apenas comprar e visualizar jogos, tendo como roles:"USER".
 - Cada usuário possui um carrinho de compras individual.
 - Os administradores têm privilégios adicionais para adicionar, atualizar e remover produtos.
 
@@ -88,23 +88,17 @@ src/
 
 ### 📝 Endpoints
 
-#### Usuários
-- **POST /users/register** - Registrar um novo usuário.
-- **POST /users/login** - Login de um usuário.
-- **POST /users/email** - Obter detalhes de um usuário através do Email.
-- **GET /users** - Listar todos os usuários de um usuário.
-- **GET /users/:id** - Obter detalhes de um usuário através do ID.
-- **PUT /users/:id** - Atualizar um usuário.
-- **DELETE /users/:id** - Remover um usuário (somente ADMIN).
-- **DELETE /users** - Remover todos os usuários (somente ADMIN).
+#### Autenticação
+- **POST /auth/register** - Registrar um novo usuário.
+- **POST /auth/login** - Login de um usuário.
   
 #### Produtos
-- **POST /products** - Adicionar um novo produto (somente ADMIN).
-- **POST /products/all** - Adicionar múltiplos produtos (somente ADMIN).
 - **GET /products** - Listar todos os produtos.
 - **GET /products/:id** - Obter detalhes de um produto.
+- **POST /products** - Adicionar um novo produto (somente ADMIN).
 - **PUT /products/:id** - Atualizar um produto (somente ADMIN).
 - **DELETE /products/:id** - Remover um produto (somente ADMIN).
+- **POST /products/all** - Adicionar múltiplos produtos (somente ADMIN).
 - **DELETE /products/all** - Remover todos os produtos (somente ADMIN).
 
 #### Carrinho

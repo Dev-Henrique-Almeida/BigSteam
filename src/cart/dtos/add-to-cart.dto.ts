@@ -1,12 +1,21 @@
-import { IsInt, IsNotEmpty, Min } from 'class-validator';
+import {
+  IsInt,
+  IsArray,
+  ArrayMinSize,
+  ValidateNested,
+  Min,
+} from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class AddToCartDto {
-  @IsInt()
-  @IsNotEmpty()
-  productId: number;
+  @IsArray()
+  @ArrayMinSize(1)
+  @IsInt({ each: true })
+  productId: number[];
 
-  @IsInt()
-  @IsNotEmpty()
-  @Min(1)
-  quantity: number;
+  @IsArray()
+  @ArrayMinSize(1)
+  @IsInt({ each: true })
+  @Min(1, { each: true })
+  quantity: number[];
 }
