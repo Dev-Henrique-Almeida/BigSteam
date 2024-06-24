@@ -15,7 +15,7 @@ export class CartService {
 
     if (productId.length !== quantity.length) {
       throw new BadRequestException(
-        'Product IDs and quantities must have the same length.',
+        'IDs dos produtos e quantidades, devem ter o mesmo tamanho.',
       );
     }
 
